@@ -1,0 +1,321 @@
+<Window x:Class="ROSC.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        Title="POCUS-CAC GUI 1.00" Height="1080" Width="1920" 
+        MinHeight="1080" MinWidth="1920"
+        Background="Black" Foreground="White"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" MinWidth="400"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="600" MinWidth="600"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- 좌측 패널: Command Frame -->
+        <Border Grid.Column="0" Background="#303030" BorderBrush="#404040" BorderThickness="1">
+            <StackPanel Margin="0,20,0,20" VerticalAlignment="Top">
+                
+                <!-- 헤더 -->
+                <TextBlock Text="POCUS-CAC GUI" 
+                          HorizontalAlignment="Center" 
+                          FontSize="18" FontWeight="Bold" 
+                          Margin="0,0,0,20" 
+                          Foreground="White"/>
+
+                <!-- CheckBox 섹션 -->
+                <StackPanel Margin="5,0,0,0">
+                    <!-- 첫 번째 행 -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <CheckBox x:Name="cbAutoCalc" Content="Auto Calc" 
+                                 Width="150" Height="40" 
+                                 IsChecked="True" Margin="0,0,10,0"/>
+                        <CheckBox x:Name="cbAutoROI" Content="Auto ROI" 
+                                 Width="150" Height="40" 
+                                 IsChecked="True"/>
+                    </StackPanel>
+                    
+                    <!-- 두 번째 행 -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <CheckBox x:Name="cbAutoSave" Content="Auto Save" 
+                                 Width="150" Height="40" 
+                                 IsChecked="True" Margin="0,0,10,0"/>
+                        <CheckBox x:Name="cbAutoFolder" Content="Auto Folder" 
+                                 Width="150" Height="40" 
+                                 IsChecked="True"/>
+                    </StackPanel>
+                    
+                    <!-- 세 번째 행 -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <CheckBox x:Name="cbSmallModel" Content="Lightweight Model" 
+                                 Width="150" Height="40" 
+                                 IsChecked="True" Margin="0,0,10,0"/>
+                        <CheckBox x:Name="cbDrawEllipse" Content="Draw Ellipse" 
+                                 Width="150" Height="40" 
+                                 IsChecked="True"/>
+                    </StackPanel>
+                    
+                    <!-- 네 번째 행 -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <CheckBox x:Name="cbPythonInference" Content="Python Inference" 
+                                 Width="150" Height="40" 
+                                 IsChecked="False" Margin="0,0,10,0"/>
+                        <CheckBox x:Name="cbPerformanceMode" Content="Performance Mode" 
+                                 Width="150" Height="40" 
+                                 IsChecked="True"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- 버튼 섹션 -->
+                <StackPanel Margin="0,0,0,20">
+                    <Button x:Name="btnConnectHDMI" Content="Connect HDMI" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnConnectHDMI_Click"/>
+                    
+                    <Button x:Name="btnLoadVideo" Content="Load Video" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnLoadVideo_Click"/>
+                    
+                    <Button x:Name="btnPlay" Content="Play" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnPlay_Click"/>
+                    
+                    <Button x:Name="btnCalculateCAC" Content="Calculate" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnCalculateCAC_Click"/>
+                    
+                    <Button x:Name="btnSetROI" Content="Set ROI" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnSetROI_Click"/>
+                    
+                    <Button x:Name="btnExportVideo" Content="Export Video" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnExportVideo_Click"/>
+                    
+                    <Button x:Name="btnExportImage" Content="Export Image" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnExportImage_Click"/>
+                    
+                    <Button x:Name="btnExportExcel" Content="Export Excel" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnExportExcel_Click"/>
+                    
+                    <Button x:Name="btnCompareInference" Content="Compare Inference" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           Click="BtnCompareInference_Click"/>
+                    
+                    <Button x:Name="btnSelectModel" Content="Select Model File" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           Click="BtnSelectModel_Click"/>
+                    
+                    <Button x:Name="btnConvertToOnnx" Content="Convert PTH to ONNX" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnConvertToOnnx_Click"/>
+                    
+                    <Button x:Name="btnCheckCUDA" Content="Check CUDA Status" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnCheckCUDA_Click"/>
+                    
+                    <Button x:Name="btnViewLogs" Content="View Logs" 
+                           Style="{StaticResource PrimaryButton}"
+                           Width="350" Height="100" Margin="0,0,0,15"
+                           IsEnabled="False"
+                           Click="BtnViewLogs_Click"/>
+                </StackPanel>
+
+                <!-- Status Display -->
+                <Border Background="#FF2D2D30" 
+                       CornerRadius="5" 
+                       Margin="25,0,25,10" 
+                       Padding="15,10">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Ellipse x:Name="statusIndicator" 
+                                Width="12" Height="12" 
+                                Fill="#FF007ACC" 
+                                Margin="0,0,10,0"/>
+                        <TextBlock x:Name="statusText" 
+                                  Text="Initializing..." 
+                                  Foreground="#FFFFFFFF" 
+                                  FontSize="14" 
+                                  FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Progress Bar -->
+                <ProgressBar x:Name="progressBar" 
+                            Height="30" Margin="25,0,25,0"
+                            Visibility="Collapsed"
+                            IsIndeterminate="True"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 중앙 패널: Data Frame -->
+        <Border Grid.Column="1" Background="Black" BorderBrush="#404040" BorderThickness="1">
+            <Grid>
+                <Image x:Name="imageDisplay" 
+                      Stretch="Uniform" 
+                      HorizontalAlignment="Center" 
+                      VerticalAlignment="Center"/>
+                
+                <!-- ROI 선택을 위한 Canvas 오버레이 -->
+                <Canvas x:Name="roiCanvas" 
+                       Background="Transparent" 
+                       Visibility="Collapsed"
+                       MouseLeftButtonDown="RoiCanvas_MouseLeftButtonDown"
+                       MouseMove="RoiCanvas_MouseMove"
+                       MouseLeftButtonUp="RoiCanvas_MouseLeftButtonUp">
+                    <Rectangle x:Name="roiRectangle" 
+                              Stroke="Green" 
+                              StrokeThickness="2" 
+                              Fill="Transparent"
+                              Visibility="Collapsed"/>
+                </Canvas>
+            </Grid>
+        </Border>
+
+        <!-- 우측 패널: Measure & Graph Frame -->
+        <Border Grid.Column="2" Background="#303030" BorderBrush="#404040" BorderThickness="1">
+            <StackPanel Margin="10,20,0,20">
+                
+                <!-- 측정값 표시 -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20" HorizontalAlignment="Center">
+                    <Border Background="#404040" BorderBrush="#606060" BorderThickness="1" 
+                           Width="300" Height="100" Margin="0,0,10,0">
+                        <TextBlock x:Name="labelMeasureROSC" 
+                                  Text="ROSC Status" 
+                                  HorizontalAlignment="Center" 
+                                  VerticalAlignment="Center"
+                                  FontSize="16" FontWeight="Bold"
+                                  Foreground="Yellow"/>
+                    </Border>
+                    
+                    <Border Background="#404040" BorderBrush="#606060" BorderThickness="1" 
+                           Width="300" Height="100">
+                        <TextBlock x:Name="labelMeasureCAC" 
+                                  Text="CAC: 0.00" 
+                                  HorizontalAlignment="Center" 
+                                  VerticalAlignment="Center"
+                                  FontSize="16" FontWeight="Bold"
+                                  Foreground="White"/>
+                    </Border>
+                </StackPanel>
+
+                <!-- CAC 그래프 -->
+                <oxy:PlotView x:Name="cacGraph" 
+                             Title="CAC Value Over Time"
+                             Height="300" Margin="0,0,0,20"
+                             Background="Black">
+                    <oxy:PlotView.Model>
+                        <oxy:PlotModel x:Name="cacPlotModel" 
+                                      TextColor="White" 
+                                      PlotAreaBorderColor="Gray"
+                                      Background="Black">
+                            <oxy:PlotModel.Axes>
+                                <oxy:LinearAxis x:Name="cacXAxis" 
+                                               Position="Bottom" 
+                                               Title="Frame" 
+                                               TextColor="White" 
+                                               TicklineColor="Gray"/>
+                                <oxy:LinearAxis x:Name="cacYAxis" 
+                                               Position="Left" 
+                                               Title="CAC Value" 
+                                               Minimum="0.2" 
+                                               Maximum="1.0"
+                                               TextColor="White" 
+                                               TicklineColor="Gray"/>
+                            </oxy:PlotModel.Axes>
+                            <oxy:PlotModel.Series>
+                                <oxy:LineSeries x:Name="cacLineSeries" 
+                                               Title="CA" 
+                                               Color="Red" 
+                                               StrokeThickness="2"/>
+                                <oxy:LineSeries x:Name="ijvLineSeries" 
+                                               Title="IJV" 
+                                               Color="Blue" 
+                                               StrokeThickness="2"/>
+                                <oxy:LineSeries x:Name="thresholdLineSeries" 
+                                               Title="Threshold 0.94" 
+                                               Color="Yellow" 
+                                               LineStyle="Dash" 
+                                               StrokeThickness="2"/>
+                            </oxy:PlotModel.Series>
+                        </oxy:PlotModel>
+                    </oxy:PlotView.Model>
+                </oxy:PlotView>
+
+                <!-- ABP 예측 그래프 -->
+                <oxy:PlotView x:Name="abpGraph" 
+                             Title="ABP Prediction vs CAC"
+                             Height="300"
+                             Background="Black">
+                    <oxy:PlotView.Model>
+                        <oxy:PlotModel x:Name="abpPlotModel" 
+                                      TextColor="White" 
+                                      PlotAreaBorderColor="Gray"
+                                      Background="Black">
+                            <oxy:PlotModel.Axes>
+                                <oxy:LinearAxis x:Name="abpXAxis" 
+                                               Position="Bottom" 
+                                               Title="CAC Value" 
+                                               Minimum="0.3" 
+                                               Maximum="1.05"
+                                               TextColor="White" 
+                                               TicklineColor="Gray"/>
+                                <oxy:LinearAxis x:Name="abpYAxis" 
+                                               Position="Left" 
+                                               Title="Pred BP Value" 
+                                               Minimum="0" 
+                                               Maximum="180"
+                                               TextColor="White" 
+                                               TicklineColor="Gray"/>
+                            </oxy:PlotModel.Axes>
+                            <oxy:PlotModel.Series>
+                                <oxy:LineSeries x:Name="sbpLineSeries" 
+                                               Title="SBP Line" 
+                                               Color="Red" 
+                                               StrokeThickness="1"/>
+                                <oxy:LineSeries x:Name="mbpLineSeries" 
+                                               Title="MBP Line" 
+                                               Color="Green" 
+                                               StrokeThickness="1"/>
+                                <oxy:LineSeries x:Name="dbpLineSeries" 
+                                               Title="DBP Line" 
+                                               Color="Magenta" 
+                                               StrokeThickness="1"/>
+                                <oxy:ScatterSeries x:Name="abpScatterSeries" 
+                                                  Title="Current ABP" 
+                                                  MarkerType="Circle" 
+                                                  MarkerSize="8" 
+                                                  MarkerFill="Yellow"/>
+                            </oxy:PlotModel.Series>
+                        </oxy:PlotModel>
+                    </oxy:PlotView.Model>
+                </oxy:PlotView>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
