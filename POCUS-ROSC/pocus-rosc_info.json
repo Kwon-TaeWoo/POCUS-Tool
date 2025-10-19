@@ -1,0 +1,44 @@
+{
+  "model_type": "VisionTransformer",
+  "input_size": [
+    256,
+    256,
+    3
+  ],
+  "output_path": "pocus-rosc.onnx",
+  "parameters_count": 105322291,
+  "trainable_parameters": 105322291,
+  "device": "cuda:0",
+  "opset_version": 11,
+  "input_names": [
+    "input"
+  ],
+  "output_names": [
+    "output"
+  ],
+  "preprocessing": {
+    "resize": [
+      256,
+      256
+    ],
+    "normalize": {
+      "mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "std": [
+        0.229,
+        0.224,
+        0.225
+      ]
+    }
+  },
+  "postprocessing": {
+    "resize_output": [
+      500,
+      460
+    ],
+    "multiply_factor": 120
+  }
+}

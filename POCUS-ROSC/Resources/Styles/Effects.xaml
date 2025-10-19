@@ -1,0 +1,30 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- 그림자 효과 -->
+    <Style x:Key="DropShadowEffect" TargetType="FrameworkElement">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="Black" 
+                                Direction="270" 
+                                ShadowDepth="5" 
+                                BlurRadius="10" 
+                                Opacity="0.3"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- 강조 그림자 효과 -->
+    <Style x:Key="AccentDropShadowEffect" TargetType="FrameworkElement">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="#FF007ACC" 
+                                Direction="270" 
+                                ShadowDepth="5" 
+                                BlurRadius="10" 
+                                Opacity="0.6"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

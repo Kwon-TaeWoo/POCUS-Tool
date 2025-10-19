@@ -1,0 +1,21 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- 기본 텍스트 박스 스타일 -->
+    <Style x:Key="DefaultTextBox" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource SecondaryBackground}"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryForeground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SecondaryBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontFamily" Value="Malgun Gothic"/>
+        <Setter Property="Padding" Value="5"/>
+    </Style>
+    
+    <!-- 기본 체크박스 스타일 -->
+    <Style x:Key="DefaultCheckBox" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource PrimaryForeground}"/>
+        <Setter Property="FontFamily" Value="Malgun Gothic"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+    
+</ResourceDictionary>
